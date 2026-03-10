@@ -3,19 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creative Plan PUTIH Q2</title>
+    <title>PUTIH Q2 Strategy - Zamo</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- React & Framer Motion -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,700;0,800;1,800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap');
         
         :root {
             --bg-color: #02040a;
@@ -43,309 +38,237 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Loading indicator fixing */
-        #root:empty {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #02040a;
+        .tab-active {
+            background: white;
+            color: black;
+            box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
         }
 
-        #root:empty::after {
-            content: "LOADING STRATEGY...";
+        .tab-inactive {
+            color: #64748b;
+        }
+
+        .tab-inactive:hover {
             color: white;
-            font-weight: 800;
-            letter-spacing: 0.5em;
-            font-size: 10px;
-            animation: pulse 1.5s infinite;
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.2; }
-            50% { opacity: 1; }
-            100% { opacity: 0.2; }
+        .content-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Blobs */
+        .blob {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -10;
+            pointer-events: none;
+            opacity: 0.15;
         }
     </style>
 </head>
-<body>
-    <div id="root"></div>
+<body class="min-h-screen">
+    <div class="blob bg-blue-600 top-[-10%] left-[-5%]"></div>
+    <div class="blob bg-purple-600 bottom-[-10%] right-[-5%]"></div>
 
-    <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
-        const { motion, AnimatePresence } = FramerMotion;
-
-        // Helper component for Icons
-        const Icon = ({ name, size = 20, className = "" }) => {
-            const iconRef = useRef(null);
-            
-            useEffect(() => {
-                if (window.lucide) {
-                    window.lucide.createIcons();
-                }
-            }, [name]);
-
-            return <i data-lucide={name} className={className} style={{ width: size, height: size }}></i>;
-        };
-
-        const App = () => {
-            const [activeMonth, setActiveMonth] = useState('APRIL');
-            const [isMounted, setIsMounted] = useState(false);
-
-            useEffect(() => {
-                setIsMounted(true);
-                // Initial icon creation
-                if (window.lucide) {
-                    window.lucide.createIcons();
-                }
-            }, []);
-
-            const strategyData = {
-                APRIL: {
-                    theme: "Pasca Lebaran & Recovery",
-                    momentum: "Arus Balik & Silaturahmi (Lebaran 21 Maret)",
-                    hero: ["SWS (Whitening Soap)", "SWK (Whitening Kit)", "PWF (Water Flosser)"],
-                    giveaway: {
-                        period: "15 - 21 Maret",
-                        announcement: "27 / 28 Maret",
-                        note: "Kado Lebaran / THR momentum"
-                    },
-                    content: [
-                        {
-                            title: "Detox Gigi Pasca Lebaran",
-                            hook: "Detox gigi abis tempur opor & rendang!",
-                            visual: "Macro shot PWF angkat sisa daging di sela gigi.",
-                            desc: "Fokus ke kebersihan sela gigi setelah makan besar."
-                        },
-                        {
-                            title: "Confidence Restoration",
-                            hook: "Balik ngantor dengan senyum paling kinclong.",
-                            visual: "Before-after 7 hari pemakaian SWS/SWK.",
-                            desc: "Hapus noda kopi/teh sisa kunjungan silaturahmi."
-                        }
-                    ],
-                    extra: "Hari Kartini Activation (21 April)"
-                },
-                MEI: {
-                    theme: "Edukasi & Self-Care",
-                    momentum: "Banyak Hari Libur Nasional (Waisak & Kenaikan)",
-                    hero: ["PWS (Whitening Strip)"],
-                    giveaway: null,
-                    content: [
-                        {
-                            title: "Product Comparison",
-                            hook: "Gigi sensitif tapi pengen putih? Ini solusinya.",
-                            visual: "Split-screen tekstur & cara pakai SWS vs PWS.",
-                            desc: "Edukasi formula PAP yang aman & nggak bikin ngilu."
-                        },
-                        {
-                            title: "Long Weekend Ritual",
-                            hook: "Liburan produktif: Glow up dari rumah.",
-                            visual: "POV aesthetic pake PWS pas staycation/rebahan.",
-                            desc: "Posisikan perawatan gigi sebagai aktivitas me-time."
-                        }
-                    ],
-                    extra: "Flash Sale Tanggal Merah"
-                },
-                JUNI: {
-                    theme: "Professional Daily Routine",
-                    momentum: "Musim Wisuda, Libur Sekolah & Kondangan",
-                    hero: ["SWK (Full Kit)", "Teeth Guard"],
-                    giveaway: null,
-                    content: [
-                        {
-                            title: "Home Clinic Authority",
-                            hook: "Nggak perlu ke klinik, cukup 15 menit di rumah.",
-                            visual: "Cinematic unboxing bedah isi kit (Light, Gel, Ruler).",
-                            desc: "Tunjukkan kelengkapan alat agar audiens percaya kualitasnya."
-                        },
-                        {
-                            title: "Total Night Routine",
-                            hook: "Protect your smile while you sleep.",
-                            visual: "Tutorial pakai SWK ditutup dengan Teeth Guard.",
-                            desc: "Edukasi cegah gigi aus (bruxism) sekaligus memutihkan."
-                        }
-                    ],
-                    extra: "Wedding Season Special Package"
-                }
-            };
-
-            if (!isMounted) return null;
-
-            return (
-                <div className="min-h-screen relative">
-                    {/* Background Blobs */}
-                    <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-                        <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-blue-600/10 blur-[120px] rounded-full"></div>
-                        <div className="absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] bg-purple-600/10 blur-[120px] rounded-full"></div>
-                    </div>
-
-                    {/* Navigation */}
-                    <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60 backdrop-blur-xl">
-                        <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-lg">
-                                    <Icon name="sparkles" className="text-black" />
-                                </div>
-                                <span className="text-xl font-black tracking-tighter text-white uppercase italic">PUTIH.</span>
-                            </div>
-                            <div className="flex gap-4">
-                                <span className="hidden md:inline-flex bg-white/5 px-4 py-1.5 rounded-full text-[10px] font-bold text-slate-400 items-center border border-white/10 uppercase tracking-widest">
-                                    Internal Draft Q2
-                                </span>
-                            </div>
-                        </div>
-                    </nav>
-
-                    {/* Main Content */}
-                    <main className="max-w-7xl mx-auto px-6 pt-40 pb-20">
-                        {/* Hero */}
-                        <motion.section 
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="mb-24 text-center md:text-left"
-                        >
-                            <span className="px-4 py-1.5 rounded-full text-[10px] font-black border border-blue-500/30 bg-blue-500/10 text-blue-400 tracking-widest uppercase">
-                                Creative Strategy Roadmap
-                            </span>
-                            <h1 className="text-6xl md:text-8xl font-black text-white mt-8 mb-8 tracking-tighter leading-[0.85]">
-                                SMART <span className="text-gradient italic">ACTION.</span>
-                            </h1>
-                            <p className="text-xl text-slate-400 max-w-2xl leading-relaxed mx-auto md:mx-0">
-                                Strategi konten terintegrasi untuk dominasi pasar perawatan gigi mandiri di Indonesia.
-                            </p>
-                        </motion.section>
-
-                        {/* Giveaway Timeline */}
-                        <section className="mb-24">
-                            <div className="glass rounded-[40px] p-8 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-10">
-                                <div className="flex gap-6 items-center">
-                                    <div className="bg-blue-600 p-5 rounded-2xl shadow-xl shadow-blue-600/20">
-                                        <Icon name="gift" className="text-white" size={32} />
-                                    </div>
-                                    <div>
-                                        <h3 className="text-2xl font-black text-white mb-1">Giveaway Q2</h3>
-                                        <p className="text-slate-500 font-medium">Momentum Kado Lebaran</p>
-                                    </div>
-                                </div>
-                                <div className="flex flex-wrap justify-center gap-10 lg:border-l lg:border-white/10 lg:pl-12">
-                                    <div className="text-center md:text-left">
-                                        <p className="text-[10px] uppercase font-black text-slate-500 tracking-[0.2em] mb-2">Periode</p>
-                                        <p className="text-2xl font-bold text-white italic">15 - 21 Mar</p>
-                                    </div>
-                                    <div className="text-center md:text-left">
-                                        <p className="text-[10px] uppercase font-black text-slate-500 tracking-[0.2em] mb-2">Pengumuman</p>
-                                        <p className="text-2xl font-bold text-blue-400 italic">27 / 28 Mar</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        {/* Matrix Selector */}
-                        <section className="mb-32">
-                            <div className="flex flex-col lg:flex-row justify-between items-end gap-10 mb-16">
-                                <div className="max-w-md">
-                                    <h2 className="text-4xl font-black text-white mb-4 tracking-tight">Creative Matrix</h2>
-                                    <p className="text-slate-500 font-medium">Breakdown eksekusi visual dan narasi produk bulanan.</p>
-                                </div>
-                                <div className="flex bg-white/5 p-2 rounded-3xl border border-white/10 backdrop-blur-md">
-                                    {['APRIL', 'MEI', 'JUNI'].map(month => (
-                                        <button
-                                            key={month}
-                                            onClick={() => setActiveMonth(month)}
-                                            className={`px-10 py-4 rounded-2xl text-[10px] font-black tracking-[0.2em] transition-all duration-300 ${activeMonth === month ? 'bg-white text-black shadow-2xl scale-105' : 'text-slate-500 hover:text-white'}`}
-                                        >
-                                            {month}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <AnimatePresence mode="wait">
-                                <motion.div 
-                                    key={activeMonth}
-                                    initial={{ opacity: 0, x: 20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -20 }}
-                                    transition={{ duration: 0.4 }}
-                                    className="grid lg:grid-cols-12 gap-10"
-                                >
-                                    <div className="lg:col-span-8">
-                                        <div className="glass rounded-[40px] p-10 border-blue-500/10">
-                                            <div className="flex flex-wrap items-center gap-4 mb-10">
-                                                <div className="flex items-center gap-2 bg-blue-500/10 px-4 py-2 rounded-xl border border-blue-500/20">
-                                                    <Icon name="clock" className="text-blue-400" size={14} />
-                                                    <span className="text-blue-400 font-bold uppercase tracking-widest text-[9px]">{strategyData[activeMonth].momentum}</span>
-                                                </div>
-                                                <span className="px-4 py-2 bg-purple-500/10 text-purple-400 border border-purple-500/20 rounded-xl text-[9px] font-bold uppercase tracking-widest">Target: Conversion</span>
-                                            </div>
-                                            
-                                            <h3 className="text-5xl font-black text-white mb-12 tracking-tighter leading-none">{strategyData[activeMonth].theme}</h3>
-                                            
-                                            <div className="grid md:grid-cols-2 gap-12">
-                                                {strategyData[activeMonth].content.map((item, idx) => (
-                                                    <div key={idx} className="group relative">
-                                                        <div className="flex items-center gap-4 mb-6">
-                                                            <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Angle 0{idx+1}</span>
-                                                            <div className="h-px flex-1 bg-white/5"></div>
-                                                        </div>
-                                                        <h4 className="text-xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">"{item.hook}"</h4>
-                                                        <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4">
-                                                            <div className="flex gap-3">
-                                                                <Icon name="zap" className="text-amber-500 shrink-0 mt-1" size={14} />
-                                                                <p className="text-xs text-slate-300 leading-relaxed"><span className="text-slate-500 font-black uppercase mr-2 text-[9px]">Visual:</span>{item.visual}</p>
-                                                            </div>
-                                                            <div className="flex gap-3">
-                                                                <Icon name="info" className="text-blue-400 shrink-0 mt-1" size={14} />
-                                                                <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="lg:col-span-4 space-y-8">
-                                        <div className="glass rounded-[40px] p-8">
-                                            <div className="flex items-center gap-3 mb-8">
-                                                <Icon name="layout" className="text-slate-500" size={18} />
-                                                <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Hero Products</h4>
-                                            </div>
-                                            <div className="space-y-4">
-                                                {strategyData[activeMonth].hero.map((h, i) => (
-                                                    <div key={i} className="flex items-center justify-between p-5 bg-black/40 border border-white/5 rounded-2xl group hover:border-blue-500/30 transition-all">
-                                                        <span className="font-bold text-white text-sm tracking-tight group-hover:text-blue-400 transition-colors">{h}</span>
-                                                        <Icon name="check-circle-2" className="text-emerald-500" size={18} />
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                        <div className="bg-indigo-600/10 border border-indigo-500/20 rounded-[40px] p-10 relative overflow-hidden">
-                                            <div className="absolute -top-4 -right-4 opacity-5">
-                                                <Icon name="sparkles" size={120} />
-                                            </div>
-                                            <h4 className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-4 italic">Campaign Tactical</h4>
-                                            <p className="text-white font-black text-2xl tracking-tight leading-tight">{strategyData[activeMonth].extra}</p>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            </AnimatePresence>
-                        </section>
-                    </main>
-
-                    <footer className="max-w-7xl mx-auto px-6 py-20 border-t border-white/5 flex flex-col items-center">
-                        <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center mb-8 border border-white/10">
-                            <Icon name="sparkles" className="text-white" size={20} />
-                        </div>
-                        <p className="text-[9px] font-black uppercase tracking-[0.5em] text-slate-600">PUTIH &copy; 2026 INTERNAL STRATEGY BY ZAMO</p>
-                    </footer>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-lg">
+                    <i data-lucide="sparkles" class="text-black w-5 h-5"></i>
                 </div>
-            );
+                <span class="text-xl font-black tracking-tighter text-white uppercase italic">PUTIH.</span>
+            </div>
+            <div class="flex gap-4">
+                <span class="hidden md:inline-flex bg-white/5 px-4 py-1.5 rounded-full text-[10px] font-bold text-slate-400 items-center border border-white/10 uppercase tracking-widest">
+                    Internal Strategy Q2
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <main id="main-content" class="max-w-7xl mx-auto px-6 pt-40 pb-20">
+        <!-- Hero -->
+        <header class="mb-24 text-center md:text-left">
+            <span class="px-4 py-1.5 rounded-full text-[10px] font-black border border-blue-500/30 bg-blue-500/10 text-blue-400 tracking-widest uppercase">
+                Creative Strategy Roadmap
+            </span>
+            <h1 class="text-6xl md:text-8xl font-black text-white mt-8 mb-8 tracking-tighter leading-[0.85]">
+                SMART <span class="text-gradient italic">ACTION.</span>
+            </h1>
+            <p class="text-xl text-slate-400 max-w-2xl leading-relaxed mx-auto md:mx-0">
+                Strategi konten terintegrasi untuk dominasi pasar perawatan gigi mandiri di Indonesia.
+            </p>
+        </header>
+
+        <!-- Giveaway -->
+        <section class="mb-24">
+            <div class="glass rounded-[40px] p-8 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-10">
+                <div class="flex gap-6 items-center">
+                    <div class="bg-blue-600 p-5 rounded-2xl shadow-xl shadow-blue-600/20">
+                        <i data-lucide="gift" class="text-white w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-black text-white mb-1">Giveaway Q2</h3>
+                        <p class="text-slate-500 font-medium">Momentum Kado Lebaran</p>
+                    </div>
+                </div>
+                <div class="flex flex-wrap justify-center gap-10 lg:border-l lg:border-white/10 lg:pl-12">
+                    <div class="text-center md:text-left">
+                        <p class="text-[10px] uppercase font-black text-slate-500 tracking-[0.2em] mb-2">Periode</p>
+                        <p class="text-2xl font-bold text-white italic">15 - 21 Mar</p>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <p class="text-[10px] uppercase font-black text-slate-500 tracking-[0.2em] mb-2">Pengumuman</p>
+                        <p class="text-2xl font-bold text-blue-400 italic">27 / 28 Mar</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Matrix -->
+        <section class="mb-32">
+            <div class="flex flex-col lg:flex-row justify-between items-end gap-10 mb-16">
+                <div class="max-w-md">
+                    <h2 class="text-4xl font-black text-white mb-4 tracking-tight">Creative Matrix</h2>
+                    <p class="text-slate-500 font-medium">Breakdown eksekusi visual dan narasi produk bulanan.</p>
+                </div>
+                <div class="flex bg-white/5 p-2 rounded-3xl border border-white/10 backdrop-blur-md" id="tab-container">
+                    <button onclick="switchMonth('APRIL')" id="btn-APRIL" class="tab-btn px-10 py-4 rounded-2xl text-[10px] font-black tracking-[0.2em] transition-all duration-300 tab-active">APRIL</button>
+                    <button onclick="switchMonth('MEI')" id="btn-MEI" class="tab-btn px-10 py-4 rounded-2xl text-[10px] font-black tracking-[0.2em] transition-all duration-300 tab-inactive">MEI</button>
+                    <button onclick="switchMonth('JUNI')" id="btn-JUNI" class="tab-btn px-10 py-4 rounded-2xl text-[10px] font-black tracking-[0.2em] transition-all duration-300 tab-inactive">JUNI</button>
+                </div>
+            </div>
+
+            <div id="strategy-content" class="content-transition">
+                <!-- Content will be injected here by JS -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="max-w-7xl mx-auto px-6 py-20 border-t border-white/5 flex flex-col items-center">
+        <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center mb-8 border border-white/10">
+            <i data-lucide="sparkles" class="text-white w-5 h-5"></i>
+        </div>
+        <p class="text-[9px] font-black uppercase tracking-[0.5em] text-slate-600">PUTIH &copy; 2026 INTERNAL STRATEGY BY ZAMO</p>
+    </footer>
+
+    <script>
+        const strategyData = {
+            APRIL: {
+                theme: "Pasca Lebaran & Recovery",
+                momentum: "Arus Balik & Silaturahmi (Lebaran 21 Maret)",
+                hero: ["SWS (Whitening Soap)", "SWK (Whitening Kit)", "PWF (Water Flosser)"],
+                content: [
+                    { title: "Detox Gigi Pasca Lebaran", hook: "Detox gigi abis tempur opor & rendang!", visual: "Macro shot PWF angkat sisa makanan.", desc: "Fokus ke kebersihan sela gigi setelah makan besar." },
+                    { title: "Confidence Restoration", hook: "Balik ngantor dengan senyum paling kinclong.", visual: "Before-after 7 hari pemakaian SWS/SWK.", desc: "Hapus noda kopi/teh sisa kunjungan silaturahmi." }
+                ],
+                extra: "Hari Kartini Activation (21 April)"
+            },
+            MEI: {
+                theme: "Edukasi & Self-Care",
+                momentum: "Banyak Hari Libur Nasional (Waisak & Kenaikan)",
+                hero: ["PWS (Whitening Strip)"],
+                content: [
+                    { title: "Product Comparison", hook: "Gigi sensitif tapi pengen putih? Ini solusinya.", visual: "Split-screen tekstur SWS vs PWS.", desc: "Edukasi formula PAP yang aman & nggak bikin ngilu." },
+                    { title: "Long Weekend Ritual", hook: "Liburan produktif: Glow up dari rumah.", visual: "POV aesthetic pake PWS pas staycation.", desc: "Posisikan perawatan gigi sebagai aktivitas me-time." }
+                ],
+                extra: "Flash Sale Tanggal Merah"
+            },
+            JUNI: {
+                theme: "Professional Daily Routine",
+                momentum: "Musim Wisuda, Libur Sekolah & Kondangan",
+                hero: ["SWK (Full Kit)", "Teeth Guard"],
+                content: [
+                    { title: "Home Clinic Authority", hook: "Nggak perlu ke klinik, cukup 15 menit di rumah.", visual: "Cinematic unboxing bedah isi kit.", desc: "Tunjukkan kelengkapan alat agar audiens percaya." },
+                    { title: "Total Night Routine", hook: "Protect your smile while you sleep.", visual: "Tutorial pakai SWK + Teeth Guard.", desc: "Edukasi cegah gigi aus sekaligus memutihkan." }
+                ],
+                extra: "Wedding Season Special Package"
+            }
         };
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
+        function switchMonth(month) {
+            // Update Buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('tab-active');
+                btn.classList.add('tab-inactive');
+            });
+            document.getElementById(`btn-${month}`).classList.add('tab-active');
+            document.getElementById(`btn-${month}`).classList.remove('tab-inactive');
+
+            // Update Content
+            const data = strategyData[month];
+            const contentDiv = document.getElementById('strategy-content');
+            
+            contentDiv.style.opacity = 0;
+            contentDiv.style.transform = 'translateY(10px)';
+
+            setTimeout(() => {
+                contentDiv.innerHTML = `
+                    <div class="grid lg:grid-cols-12 gap-10">
+                        <div class="lg:col-span-8">
+                            <div class="glass rounded-[40px] p-10 border-blue-500/10">
+                                <div class="flex flex-wrap items-center gap-4 mb-10">
+                                    <div class="flex items-center gap-2 bg-blue-500/10 px-4 py-2 rounded-xl border border-blue-500/20">
+                                        <i data-lucide="clock" class="text-blue-400 w-3 h-3"></i>
+                                        <span class="text-blue-400 font-bold uppercase tracking-widest text-[9px]">${data.momentum}</span>
+                                    </div>
+                                    <span class="px-4 py-2 bg-purple-500/10 text-purple-400 border border-purple-500/20 rounded-xl text-[9px] font-bold uppercase tracking-widest">Target: Conversion</span>
+                                </div>
+                                <h3 class="text-5xl font-black text-white mb-12 tracking-tighter leading-none">${data.theme}</h3>
+                                <div class="grid md:grid-cols-2 gap-12">
+                                    ${data.content.map((item, idx) => `
+                                        <div class="group relative">
+                                            <div class="flex items-center gap-4 mb-6">
+                                                <span class="text-[10px] font-black text-slate-600 uppercase tracking-widest">Angle 0${idx+1}</span>
+                                                <div class="h-px flex-1 bg-white/5"></div>
+                                            </div>
+                                            <h4 class="text-xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">"${item.hook}"</h4>
+                                            <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-4">
+                                                <p class="text-xs text-slate-300 leading-relaxed"><span class="text-slate-500 font-black uppercase mr-2 text-[9px]">Visual:</span>${item.visual}</p>
+                                                <p class="text-xs text-slate-400 leading-relaxed">${item.desc}</p>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-4 space-y-8">
+                            <div class="glass rounded-[40px] p-8">
+                                <h4 class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-6">Hero Products</h4>
+                                <div class="space-y-4">
+                                    ${data.hero.map(h => `
+                                        <div class="flex items-center justify-between p-5 bg-black/40 border border-white/5 rounded-2xl">
+                                            <span class="font-bold text-white text-sm tracking-tight">${h}</span>
+                                            <i data-lucide="check-circle-2" class="text-emerald-500 w-4 h-4"></i>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            <div class="bg-indigo-600/10 border border-indigo-500/20 rounded-[40px] p-10 relative overflow-hidden">
+                                <h4 class="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-4 italic">Campaign Tactical</h4>
+                                <p class="text-white font-black text-2xl tracking-tight leading-tight">${data.extra}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                lucide.createIcons();
+                contentDiv.style.opacity = 1;
+                contentDiv.style.transform = 'translateY(0)';
+            }, 50);
+        }
+
+        // Initial Load
+        window.onload = () => {
+            switchMonth('APRIL');
+            lucide.createIcons();
+        };
     </script>
 </body>
 </html>
