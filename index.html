@@ -1,0 +1,335 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  Calendar, 
+  Sparkles, 
+  Droplets, 
+  ShieldCheck, 
+  ChevronRight, 
+  Layout, 
+  Target, 
+  Clock, 
+  Presentation,
+  CheckCircle2,
+  Gift,
+  Zap,
+  ArrowRight,
+  Info,
+  MousePointer2
+} from 'lucide-react';
+
+// Custom Card Component with Glassmorphism
+const Card = ({ children, className = "" }) => (
+  <div className={`bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl ${className}`}>
+    {children}
+  </div>
+);
+
+const Badge = ({ children, variant = "blue" }) => {
+  const styles = {
+    blue: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    green: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+    purple: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+    amber: "bg-amber-500/10 text-amber-400 border-amber-500/20"
+  };
+  return (
+    <span className={`px-4 py-1.5 rounded-full text-[10px] font-black border tracking-widest uppercase ${styles[variant]}`}>
+      {children}
+    </span>
+  );
+};
+
+const App = () => {
+  const [activeMonth, setActiveMonth] = useState('APRIL');
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
+  const strategyData = {
+    APRIL: {
+      theme: "Pasca Lebaran & Recovery",
+      momentum: "Arus Balik & Silaturahmi (Lebaran 21 Maret)",
+      hero: ["SWS (Whitening Soap)", "SWK (Whitening Kit)", "PWF (Water Flosser)"],
+      giveaway: {
+        period: "15 - 21 Maret",
+        announcement: "27 / 28 Maret",
+        note: "Kado Lebaran / THR momentum"
+      },
+      content: [
+        {
+          title: "Detox Gigi Pasca Lebaran",
+          hook: "Detox gigi abis tempur opor & rendang!",
+          visual: "Macro shot PWF angkat sisa daging di sela gigi.",
+          desc: "Fokus ke kebersihan sela gigi setelah makan besar."
+        },
+        {
+          title: "Confidence Restoration",
+          hook: "Balik ngantor dengan senyum paling kinclong.",
+          visual: "Before-after 7 hari pemakaian SWS/SWK.",
+          desc: "Hapus noda kopi/teh sisa kunjungan silaturahmi."
+        }
+      ],
+      extra: "Hari Kartini Activation (21 April)"
+    },
+    MEI: {
+      theme: "Edukasi & Self-Care",
+      momentum: "Banyak Hari Libur Nasional (Waisak & Kenaikan)",
+      hero: ["PWS (Whitening Strip)"],
+      giveaway: null,
+      content: [
+        {
+          title: "Product Comparison",
+          hook: "Gigi sensitif tapi pengen putih? Ini solusinya.",
+          visual: "Split-screen tekstur & cara pakai SWS vs PWS.",
+          desc: "Edukasi formula PAP yang aman & nggak bikin ngilu."
+        },
+        {
+          title: "Long Weekend Ritual",
+          hook: "Liburan produktif: Glow up dari rumah.",
+          visual: "POV aesthetic pake PWS pas staycation/rebahan.",
+          desc: "Posisikan perawatan gigi sebagai aktivitas me-time."
+        }
+      ],
+      extra: "Flash Sale Tanggal Merah"
+    },
+    JUNI: {
+      theme: "Professional Daily Routine",
+      momentum: "Musim Wisuda, Libur Sekolah & Kondangan",
+      hero: ["SWK (Full Kit)", "Teeth Guard"],
+      giveaway: null,
+      content: [
+        {
+          title: "Home Clinic Authority",
+          hook: "Nggak perlu ke klinik, cukup 15 menit di rumah.",
+          visual: "Cinematic unboxing bedah isi kit (Light, Gel, Ruler).",
+          desc: "Tunjukkan kelengkapan alat agar audiens percaya kualitasnya."
+        },
+        {
+          title: "Total Night Routine",
+          hook: "Protect your smile while you sleep.",
+          visual: "Tutorial pakai SWK ditutup dengan Teeth Guard.",
+          desc: "Edukasi cegah gigi aus (bruxism) sekaligus memutihkan."
+        }
+      ],
+      extra: "Wedding Season Special Package"
+    }
+  };
+
+  return (
+    <div className={`min-h-screen bg-[#02040a] text-slate-300 font-sans transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Background Decorative Elements */}
+      <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/10 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/10 blur-[120px] rounded-full" />
+      </div>
+
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-black/40 backdrop-blur-xl">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-white to-slate-400 rounded-xl flex items-center justify-center shadow-lg shadow-white/10">
+              <Sparkles className="text-black" size={20} />
+            </div>
+            <span className="text-xl font-black tracking-tighter text-white uppercase italic">PUTIH.</span>
+          </div>
+          <div className="hidden lg:flex gap-10 text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
+            <a href="#" className="text-white border-b-2 border-blue-500 pb-1">Creative Plan</a>
+            <a href="#" className="hover:text-white transition-colors">Visual Brief</a>
+            <a href="#" className="hover:text-white transition-colors">KPI Metrics</a>
+          </div>
+          <button className="hidden sm:block bg-blue-600 text-white px-8 py-2.5 rounded-full font-black text-[10px] tracking-widest hover:bg-blue-500 transition-all shadow-xl shadow-blue-600/20 active:scale-95">
+            PRESENTATION MODE
+          </button>
+        </div>
+      </nav>
+
+      <main className="max-w-7xl mx-auto px-6 pt-40 pb-32">
+        {/* Hero Section */}
+        <section className="mb-24 text-center lg:text-left">
+          <div className="inline-block mb-6">
+            <Badge variant="blue">Strategic Roadmap 2026</Badge>
+          </div>
+          <h1 className="text-6xl md:text-8xl font-black text-white mb-8 tracking-tighter leading-[0.9]">
+            SMART <span className="text-blue-500 italic block sm:inline">ACTION.</span>
+          </h1>
+          <p className="text-xl text-slate-400 max-w-2xl leading-relaxed mx-auto lg:mx-0">
+            Eksekusi kreatif berbasis data untuk memenangkan audiens pasca-lebaran hingga musim wisuda Q2.
+          </p>
+        </section>
+
+        {/* Giveaway Highlight - Critical Info */}
+        <section className="mb-24">
+          <div className="relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-[32px] blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <div className="relative bg-[#080a0f] rounded-[32px] p-8 md:p-12 border border-white/10 flex flex-col lg:flex-row items-center justify-between gap-10">
+              <div className="flex gap-8 items-center">
+                <div className="bg-blue-600 p-5 rounded-2xl shadow-2xl shadow-blue-600/30">
+                  <Gift className="text-white" size={32} />
+                </div>
+                <div>
+                  <h3 className="text-3xl font-black text-white mb-2 tracking-tight">Timeline Giveaway Q2</h3>
+                  <p className="text-slate-400 font-medium">Aktivasi pembuka momentum Lebaran.</p>
+                </div>
+              </div>
+              <div className="flex flex-wrap justify-center gap-10 lg:border-l lg:border-white/10 lg:pl-12">
+                <div className="text-center lg:text-left">
+                  <p className="text-[10px] uppercase font-black text-slate-500 tracking-[0.2em] mb-2">Periode Aktivasi</p>
+                  <p className="text-2xl font-bold text-white italic">15 - 21 Maret</p>
+                </div>
+                <div className="text-center lg:text-left">
+                  <p className="text-[10px] uppercase font-black text-slate-500 tracking-[0.2em] mb-2">Pengumuman Pemenang</p>
+                  <p className="text-2xl font-bold text-blue-400 italic">27 / 28 Maret</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Month Selector */}
+        <section className="mb-32">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-16">
+            <div className="max-w-xl">
+              <h2 className="text-4xl font-black text-white mb-4 tracking-tight">Creative Matrix</h2>
+              <p className="text-slate-500 font-medium">Gunakan navigasi di bawah untuk melihat detail rencana setiap bulan.</p>
+            </div>
+            <div className="flex flex-wrap bg-white/5 p-2 rounded-[24px] border border-white/10 backdrop-blur-sm self-center lg:self-end">
+              {['APRIL', 'MEI', 'JUNI'].map(month => (
+                <button
+                  key={month}
+                  onClick={() => setActiveMonth(month)}
+                  className={`px-10 py-4 rounded-[18px] text-[10px] font-black tracking-[0.2em] transition-all duration-300 ${activeMonth === month ? 'bg-white text-black shadow-2xl scale-105' : 'text-slate-500 hover:text-white hover:bg-white/5'}`}
+                >
+                  {month}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-12 gap-10">
+            {/* Strategy Details */}
+            <div className="lg:col-span-8 space-y-8">
+              <Card className="border-blue-500/10">
+                <div className="flex flex-wrap items-center gap-4 mb-8">
+                  <div className="flex items-center gap-2 bg-blue-500/10 px-4 py-2 rounded-xl border border-blue-500/20">
+                    <Clock className="text-blue-400" size={16} />
+                    <span className="text-blue-400 font-bold uppercase tracking-widest text-[10px]">{strategyData[activeMonth].momentum}</span>
+                  </div>
+                  <Badge variant="purple">Primary Content Focus</Badge>
+                </div>
+                
+                <h3 className="text-5xl font-black text-white mb-12 tracking-tighter leading-none">{strategyData[activeMonth].theme}</h3>
+                
+                <div className="grid md:grid-cols-2 gap-10">
+                  {strategyData[activeMonth].content.map((item, idx) => (
+                    <div key={idx} className="group">
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-xs font-black text-slate-500 uppercase tracking-widest italic">Angle 0{idx+1}</span>
+                        <div className="h-px flex-1 bg-white/5 mx-4" />
+                        <ArrowRight size={16} className="text-slate-800 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
+                      </div>
+                      <h4 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">"{item.hook}"</h4>
+                      <div className="space-y-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5">
+                        <div className="flex gap-3">
+                          <Zap size={14} className="text-amber-500 shrink-0 mt-1" />
+                          <p className="text-xs text-slate-300"><span className="font-black text-slate-500 uppercase mr-1">Visual:</span> {item.visual}</p>
+                        </div>
+                        <div className="flex gap-3">
+                          <Info size={14} className="text-blue-400 shrink-0 mt-1" />
+                          <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            </div>
+
+            {/* Sidebar Details */}
+            <div className="lg:col-span-4 space-y-8">
+              <Card className="bg-white/[0.02]">
+                <div className="flex items-center gap-3 mb-8">
+                  <Layout size={18} className="text-slate-500" />
+                  <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">Hero Products</h4>
+                </div>
+                <div className="space-y-4">
+                  {strategyData[activeMonth].hero.map((h, i) => (
+                    <div key={i} className="flex items-center justify-between p-5 bg-black/40 border border-white/5 rounded-2xl hover:border-blue-500/30 transition-all group">
+                      <span className="font-bold text-white text-sm tracking-tight group-hover:text-blue-400">{h}</span>
+                      <CheckCircle2 size={18} className="text-emerald-500" />
+                    </div>
+                  ))}
+                </div>
+              </Card>
+
+              <Card className="bg-indigo-600/10 border-indigo-500/20 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <MousePointer2 size={60} />
+                </div>
+                <h4 className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.3em] mb-4 italic">Campaign Tactical</h4>
+                <p className="text-white font-black text-2xl mb-2 tracking-tight">{strategyData[activeMonth].extra}</p>
+                <p className="text-slate-500 text-xs font-medium">Targeting spesifik momen untuk lonjakan engagement.</p>
+              </Card>
+
+              <div className="p-10 rounded-3xl border-2 border-dashed border-white/5 flex flex-col items-center justify-center text-center hover:border-blue-500/20 transition-all">
+                <p className="text-[10px] font-black text-slate-600 uppercase tracking-[0.4em] mb-6">Execution Readiness</p>
+                <button className="text-blue-500 font-black text-xs hover:text-blue-400 flex items-center gap-3 transition-all">
+                  LIHAT FULL BRIEF TEKNIS <ChevronRight size={14} />
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Pillars / KPI */}
+        <section className="grid md:grid-cols-3 gap-16 border-t border-white/5 pt-32">
+          <div className="relative">
+            <div className="w-16 h-16 bg-blue-500/10 rounded-[24px] flex items-center justify-center mb-8 border border-blue-500/20">
+              <Target className="text-blue-400" size={28} />
+            </div>
+            <h4 className="text-white font-black text-2xl mb-4 tracking-tight">Conversion</h4>
+            <p className="text-slate-500 text-sm leading-relaxed font-medium">Solusi masalah nyata pasca-lebaran untuk mendorong penjualan PWF & SWS secara masif.</p>
+          </div>
+          <div>
+            <div className="w-16 h-16 bg-emerald-500/10 rounded-[24px] flex items-center justify-center mb-8 border border-emerald-500/20">
+              <ShieldCheck className="text-emerald-400" size={28} />
+            </div>
+            <h4 className="text-white font-black text-2xl mb-4 tracking-tight">Trust</h4>
+            <p className="text-slate-500 text-sm leading-relaxed font-medium">Edukasi mendalam tentang formula aman PAP untuk membangun loyalitas jangka panjang.</p>
+          </div>
+          <div>
+            <div className="w-16 h-16 bg-purple-500/10 rounded-[24px] flex items-center justify-center mb-8 border border-purple-500/20">
+              <Droplets className="text-purple-400" size={28} />
+            </div>
+            <h4 className="text-white font-black text-2xl mb-4 tracking-tight">Habit</h4>
+            <p className="text-slate-500 text-sm leading-relaxed font-medium">Membentuk rutinitas "Home Clinic" sebagai gaya hidup baru yang profesional di rumah.</p>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="max-w-7xl mx-auto px-6 py-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-10">
+        <div className="flex items-center gap-4">
+          <div className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center border border-white/10">
+            <Sparkles size={14} className="text-white" />
+          </div>
+          <p className="text-slate-600 text-[9px] font-black uppercase tracking-[0.5em]">PUTIH &copy; 2026 INTERNAL STRATEGY</p>
+        </div>
+        <div className="flex gap-10 text-[9px] font-black uppercase tracking-[0.3em] text-slate-500">
+          <span className="hover:text-white transition-colors cursor-pointer">Archive</span>
+          <span className="hover:text-white transition-colors cursor-pointer">Guidelines</span>
+          <span className="hover:text-white transition-colors cursor-pointer">Support</span>
+        </div>
+      </footer>
+
+      {/* Presentation Shortcut */}
+      <div className="fixed bottom-12 right-12 z-50">
+        <button className="w-20 h-20 bg-white text-black rounded-full flex items-center justify-center shadow-[0_20px_50px_rgba(255,255,255,0.2)] hover:scale-110 active:scale-95 transition-all duration-500 group">
+          <Presentation className="group-hover:rotate-12 transition-transform" size={28} />
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default App;
